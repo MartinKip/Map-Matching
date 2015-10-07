@@ -1,8 +1,12 @@
 nl\ead\webservice\package-info.class
+nl\ead\webservice\Profile.class
+nl\ead\webservice\ApplicationService\GetFacebookData.class
+nl\ead\webservice\MatchRequest.class
+nl\ead\webservice\ObjectFactory.class
 nl\ead\webservice\services\MatchingEndpoint.class
 nl\ead\webservice\MatchResult.class
-nl\ead\webservice\Profile.class
-nl\ead\webservice\MatchRequest.class
+nl\ead\webservice\ApplicationService\IGetFacebookData.class
+nl\ead\webservice\foundation\FacebookAccess.class
+nl\ead\webservice\foundation\IFacebookAccess.class
 nl\ead\webservice\MatchInput.class
 nl\ead\webservice\MatchResponse.class
-nl\ead\webservice\ObjectFactory.class
