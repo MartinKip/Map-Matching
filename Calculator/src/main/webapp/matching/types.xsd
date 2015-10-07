@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://www.dare2date.nl/matching/schemas/types"
+        xmlns:tns="http://www.dare2date.nl/matching/schemas/types"
+        elementFormDefault="qualified">
+
+    <complexType name="MatchResult">
+        <all>
+            <element name="value" type="int"/>
+            <element name="message" type="string"/>
+        </all>
+    </complexType>
+
+    <complexType name="MatchInput">
+        <all>
+            <element name="profileUser" type="tns:Profile" minOccurs="1" maxOccurs="1"/>
+            <element name="viewUser" type="tns:Profile" minOccurs="1" maxOccurs="1"/>
+        </all>
+    </complexType>
+
+    <complexType name="Profile">
+        <sequence>
+            <element name="id" type="int" minOccurs="1" maxOccurs="1"/>
+        </sequence>
+    </complexType>
+
+</schema>

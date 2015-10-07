@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://www.dare2date.nl/matching/schemas/messages"
+        xmlns:types="http://www.dare2date.nl/matching/schemas/types"
+        elementFormDefault="qualified">
+
+    <import namespace="http://www.dare2date.nl/matching/schemas/types" schemaLocation="types.xsd"/>
+
+    <element name="MatchRequest">
+        <complexType>
+            <sequence>
+                <element name="input" type="types:MatchInput" minOccurs="1" maxOccurs="1"/>
+            </sequence>
+        </complexType>
+    </element>
+
+    <element name="MatchResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="types:MatchResult" minOccurs="1" maxOccurs="1"/>
+            </sequence>
+        </complexType>
+    </element>
+</schema>
