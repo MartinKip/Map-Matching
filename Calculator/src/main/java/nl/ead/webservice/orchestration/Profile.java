@@ -44,7 +44,6 @@ public class Profile {
 
     /**
      * Get hard coded Facebook access tokens for users
-     * @param userId
      * @return
      */
     public String getUserFacebookAccessToken(){

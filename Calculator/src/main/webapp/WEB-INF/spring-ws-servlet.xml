@@ -35,6 +35,8 @@
     <bean id="getFacebookData" class="nl.ead.webservice.application.GetFacebookData" />
     <bean id="facebookAccess" class="nl.ead.webservice.foundation.FacebookAccess" />
 
+    <bean id="getTwitterData" class="nl.ead.webservice.application.GetTwitterData" />
+    <bean id="twitterAccess" class="nl.ead.webservice.foundation.TwitterAccess" />
 
 
 </beans>

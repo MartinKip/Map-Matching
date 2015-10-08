@@ -2,6 +2,7 @@ package nl.ead.webservice.services;
 
 import nl.ead.webservice.*;
 
+import nl.ead.webservice.application.IGetTwitterData;
 import nl.ead.webservice.business.Match;
 import nl.ead.webservice.orchestration.Profile;
 import nl.ead.webservice.application.IGetFacebookData;
@@ -17,15 +18,18 @@ import java.util.List;
 public class MatchingEndpoint {
 
     private final IGetFacebookData getFacebookData;
+    private final IGetTwitterData getTwitterData;
 
     @Autowired
-    public MatchingEndpoint(IGetFacebookData getFacebookData) {
+    public MatchingEndpoint(IGetFacebookData getFacebookData, IGetTwitterData getTwitterData) {
         this.getFacebookData = getFacebookData;
+        this.getTwitterData = getTwitterData;
     }
 
     @PayloadRoot(localPart = "MatchRequest", namespace = "http://www.dare2date.nl/matching/schemas/messages")
     @ResponsePayload
     public MatchResponse match(@RequestPayload MatchRequest req) {
+        MatchResult result = new MatchResult();
 
         int viewUserId = req.getInput().getViewUser().getId();
         int profileUserId = req.getInput().getProfileUser().getId();
@@ -33,14 +37,33 @@ public class MatchingEndpoint {
         Profile viewUser = new Profile(viewUserId);
         Profile profileUser = new Profile(profileUserId);
 
-        Match matcher = new Match();
-        matcher.match(viewUser, profileUser);
+        // Get twitter data
+        List<String> viewUserTwitterData = getTwitterData.getData(viewUser);
+        List<String> profileUserTwitterdata = getTwitterData.getData(profileUser);
+
+
 
         // Get facebook data
-        MatchResult result = new MatchResult();
-        List<String> viewUserLikes = this.getFacebookData.getData(req.getInput().getViewUser());
-        List<String> profileUserLikes = this.getFacebookData.getData(req.getInput().getProfileUser());
-        int match = this.tempCountSameLikes(viewUserLikes, profileUserLikes);
+        List<String> viewUserLikes = this.getFacebookData.getData(viewUser);
+        List<String> profileUserLikes = this.getFacebookData.getData(profileUser);
+
+
+
+        System.out.println("num of hashtags for viewUser: " + viewUserTwitterData.size());
+        System.out.println("num of hashtags for profileUser: " + profileUserTwitterdata.size());
+        for(String key : viewUserTwitterData) {
+            System.out.println(key);
+        }
+
+        int match = (
+                (
+                        this.matchFacebookData(viewUserLikes, profileUserLikes) +
+                        this.matchTwitterData(viewUserTwitterData, profileUserTwitterdata) +
+                        this.crossMatchTwitterAndFacebook(viewUserLikes, profileUserTwitterdata) +
+                        this.crossMatchTwitterAndFacebook(profileUserLikes, viewUserTwitterData)
+                )
+                / 4);
+
         result.setValue(match);
         result.setMessage("Total lovers");
         MatchResponse response = new MatchResponse();
@@ -48,8 +71,19 @@ public class MatchingEndpoint {
         return response;
     }
 
-    private int tempCountSameLikes(List<String> likes1, List<String> likes2){
-        likes1.retainAll(likes2);
-        return likes1.size();
+    private int matchTwitterData(List<String> viewUserTwitterData, List<String> profileUserTwitterData) {
+        viewUserTwitterData.retainAll(profileUserTwitterData);
+        return viewUserTwitterData.size();
     }
+
+    private int matchFacebookData(List<String> viewUserFacebookData, List<String> profileUserFacebookData) {
+        viewUserFacebookData.retainAll(profileUserFacebookData);
+        return viewUserFacebookData.size();
+    }
+
+    private int crossMatchTwitterAndFacebook(List<String> facebookData, List<String> twitterData) {
+        facebookData.retainAll(twitterData);
+        return facebookData.size();
+    }
+
 }
