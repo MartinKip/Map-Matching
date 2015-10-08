@@ -32,4 +32,9 @@
         <sws:xsd location="/matching/messages.xsd" />
     </sws:dynamic-wsdl>
 
+    <bean id="getFacebookData" class="nl.ead.webservice.application.GetFacebookData" />
+    <bean id="facebookAccess" class="nl.ead.webservice.foundation.FacebookAccess" />
+
+
+
 </beans>

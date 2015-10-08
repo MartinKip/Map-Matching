@@ -16,6 +16,11 @@ public class Match {
         List<String> profileUserTwitterdata = twitterRetriever.getData(profileUser);
         System.out.println("num of hashtags for viewUser: " + viewUserTwitterData.size());
         System.out.println("num of hashtags for profileUser: " + profileUserTwitterdata.size());
+
+        for(String key : viewUserTwitterData) {
+            System.out.println(key);
+        }
+
     }
 
     public void matchUsers() {
