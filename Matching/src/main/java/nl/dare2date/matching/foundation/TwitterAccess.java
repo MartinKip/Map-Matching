@@ -1,7 +1,8 @@
 package nl.dare2date.matching.foundation;
 
 
-import nl.dare2date.matching.orchestration.Profile;
+import nl.dare2date.matching.orchestration.IProfileInternal;
+import nl.dare2date.matching.orchestration.ProfileInternal;
 import org.springframework.social.twitter.api.*;
 import org.springframework.social.twitter.api.impl.TwitterTemplate;
 
@@ -16,7 +17,7 @@ import java.util.regex.Pattern;
 public class TwitterAccess implements ITwitterAccess {
 
     @Override
-    public List<String> getData(Profile user) {
+    public List<String> getData(IProfileInternal user) {
         List<String> result = new ArrayList<>();
 
 //        Check if all necessary values of the user profile are set

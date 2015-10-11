@@ -3,7 +3,7 @@ package nl.dare2date.matching.orchestration;
 /**
  * Created by Vincent on 7-10-2015.
  */
-public class Profile {
+public class ProfileInternal implements IProfileInternal {
     private int id;
     private String twitterConsumerKey;
     private String twitterConsumerSecret;
@@ -11,21 +11,21 @@ public class Profile {
     private String twitterAccessTokenSecret;
     private String facebookAccessToken;
 
-    public Profile() {
+    public ProfileInternal() {
         this.setData();
     }
 
-    public Profile(int id) {
+    public ProfileInternal(int id) {
         this.id = id;
         this.setData();
     }
 
+    @Override
     public void view(int userId) {
         System.out.println("Entered user id is : "+ userId);
     }
 
-
-    public void setData() {
+    private void setData() {
         switch(this.id) {
             case 1:
                 this.twitterConsumerKey = "otHm6UTgJ88keqeS95sTqiCqE";
@@ -50,6 +50,10 @@ public class Profile {
         return this.facebookAccessToken;
     }
 
+    @Override
+    public void setUserFacebookAccessToken(String token) {
+        this.facebookAccessToken = token;
+    }
 
     public String getTwitterConsumerKey() {
         return this.twitterConsumerKey;
@@ -65,6 +69,11 @@ public class Profile {
 
     public String getTwitterAccessTokenSecret() {
         return this.twitterAccessTokenSecret;
+    }
+
+    @Override
+    public int getId() {
+        return id;
     }
 
 }

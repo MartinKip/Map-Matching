@@ -1,11 +1,8 @@
-package nl.dare2date.matching.services;
+package nl.dare2date.matching;
 
-import nl.dare2date.matching.MatchRequest;
-import nl.dare2date.matching.MatchResponse;
-import nl.dare2date.matching.MatchResult;
 import nl.dare2date.matching.application.IGetFacebookData;
 import nl.dare2date.matching.application.IGetTwitterData;
-import nl.dare2date.matching.orchestration.Profile;
+import nl.dare2date.matching.orchestration.ProfileInternal;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
@@ -16,7 +13,7 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 import java.util.List;
 
 @Endpoint
-public class MatchingEndpoint {
+public class MatchingEndpoint implements IMatchingEndpoint{
 
     private final IGetFacebookData getFacebookData;
     private final IGetTwitterData getTwitterData;
@@ -35,26 +32,16 @@ public class MatchingEndpoint {
         int viewUserId = req.getInput().getViewUser().getId();
         int profileUserId = req.getInput().getProfileUser().getId();
 
-        Profile viewUser = new Profile(viewUserId);
-        Profile profileUser = new Profile(profileUserId);
+        ProfileInternal viewUser = new ProfileInternal(viewUserId);
+        ProfileInternal profileUser = new ProfileInternal(profileUserId);
 
         // Get twitter data
         List<String> viewUserTwitterData = getTwitterData.getData(viewUser);
         List<String> profileUserTwitterdata = getTwitterData.getData(profileUser);
 
-
-
         // Get facebook data
         List<String> viewUserLikes = this.getFacebookData.getData(viewUser);
         List<String> profileUserLikes = this.getFacebookData.getData(profileUser);
-
-
-
-        System.out.println("num of hashtags for viewUser: " + viewUserTwitterData.size());
-        System.out.println("num of hashtags for profileUser: " + profileUserTwitterdata.size());
-        for(String key : viewUserTwitterData) {
-            System.out.println(key);
-        }
 
         int match = (
                 (
@@ -62,8 +49,7 @@ public class MatchingEndpoint {
                         this.matchTwitterData(viewUserTwitterData, profileUserTwitterdata) +
                         this.crossMatchTwitterAndFacebook(viewUserLikes, profileUserTwitterdata) +
                         this.crossMatchTwitterAndFacebook(profileUserLikes, viewUserTwitterData)
-                )
-                / 4);
+                ) / 4);
 
         result.setValue(match);
         result.setMessage("Total lovers");

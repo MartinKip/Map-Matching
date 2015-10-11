@@ -32,11 +32,14 @@
         <sws:xsd location="/matching/messages.xsd" />
     </sws:dynamic-wsdl>
 
+    <bean id="matchingEndpoint" class="nl.dare2date.matching.MatchingEndpoint"/>
+
     <bean id="getFacebookData" class="nl.dare2date.matching.application.GetFacebookData" />
     <bean id="facebookAccess" class="nl.dare2date.matching.foundation.FacebookAccess" />
 
     <bean id="getTwitterData" class="nl.dare2date.matching.application.GetTwitterData" />
     <bean id="twitterAccess" class="nl.dare2date.matching.foundation.TwitterAccess" />
 
+    <bean id="internalProfile" class="nl.dare2date.matching.orchestration.ProfileInternal"/>
 
 </beans>

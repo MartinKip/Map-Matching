@@ -1,6 +1,7 @@
 package nl.dare2date.matching.application;
 
-import nl.dare2date.matching.orchestration.Profile;
+import nl.dare2date.matching.orchestration.IProfileInternal;
+import nl.dare2date.matching.orchestration.ProfileInternal;
 import nl.dare2date.matching.foundation.IFacebookAccess;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -19,7 +20,7 @@ public class GetFacebookData implements IGetFacebookData {
     }
 
     @Override
-    public List<String> getData(Profile user) {
+    public List<String> getData(IProfileInternal user) {
         List<String> userData = this.facebookAccess.getFacebookLikes(user.getUserFacebookAccessToken());
         return userData;
     }

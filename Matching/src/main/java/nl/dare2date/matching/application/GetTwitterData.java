@@ -1,7 +1,8 @@
 package nl.dare2date.matching.application;
 
 import nl.dare2date.matching.foundation.ITwitterAccess;
-import nl.dare2date.matching.orchestration.Profile;
+import nl.dare2date.matching.orchestration.IProfileInternal;
+import nl.dare2date.matching.orchestration.ProfileInternal;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public class GetTwitterData implements IGetTwitterData {
         this.twitterAccess = twitterAcces;
     }
 
-    public List<String> getData(Profile user) {
+    public List<String> getData(IProfileInternal user) {
         return this.twitterAccess.getData(user);
     }
 }
