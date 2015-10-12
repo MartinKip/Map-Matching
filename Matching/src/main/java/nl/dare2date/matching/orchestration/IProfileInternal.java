@@ -10,6 +10,14 @@ public interface IProfileInternal {
 
     void setUserFacebookAccessToken(String token);
 
+    void setTwitterConsumerKey(String consumerKey);
+
+    void setTwitterConsumerSecret(String consumerSecret);
+
+    void setTwitterAccessToken(String accessToken);
+
+    void setTwitterAccessTokenSecret(String accessTokenSecret);
+
     String getTwitterConsumerKey();
 
     String getTwitterConsumerSecret();

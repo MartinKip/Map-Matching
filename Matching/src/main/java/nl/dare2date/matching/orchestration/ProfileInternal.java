@@ -28,17 +28,20 @@ public class ProfileInternal implements IProfileInternal {
     private void setData() {
         switch(this.id) {
             case 1:
-                this.twitterConsumerKey = "otHm6UTgJ88keqeS95sTqiCqE";
-                this.twitterConsumerSecret = "7vM6EDM5VqNYvs0pFhym09KxqdtqZ0nvl3WkWuOQ18MHvmrR9T";
-                this.twitterAccessToken = "234690092-9BwU6ZeDcMzN4UGV9BC9WoOy6uUOGexMiGWYV1eE";
-                this.twitterAccessTokenSecret = "s893vukc7vfDGcmNNkjPvmKOLTeXDZv5sjCzuqgxytqUy";
-                facebookAccessToken = "CAAM7hapoD4gBAJnvO13rSOxGABWHDZCIo90ajzvKGBSovy1v1g2eqbbXNKKG3A4wr8xvFefSSD7OAMSZBXWscRQSZCW6o1P5EAIbe7ep4TwAJZBIZBJcZA8CPke3n2uZB79GKXiZAKWu7tsrr1E0fyAZCirZBl7aPT1kPOLZC3TzkZADdR80acd6m7n6cfSGaC61DYl1rWniKl1O0geBKZBIZByviBAGdzHpZA6ZApIZD";
+//                Vincent
+                this.setTwitterConsumerKey("otHm6UTgJ88keqeS95sTqiCqE");
+                this.setTwitterConsumerSecret("7vM6EDM5VqNYvs0pFhym09KxqdtqZ0nvl3WkWuOQ18MHvmrR9T");
+                this.setTwitterAccessToken("234690092-9BwU6ZeDcMzN4UGV9BC9WoOy6uUOGexMiGWYV1eE");
+                this.setTwitterAccessTokenSecret("s893vukc7vfDGcmNNkjPvmKOLTeXDZv5sjCzuqgxytqUy");
+                this.setUserFacebookAccessToken("CAACEdEose0cBAHYEjayn7ZBqLOuuu02j3GdLrJPgdHGq5gmX4eIH8m1KY4FBZBlwb0NCH5oPU6rHiqRD7bbiYpLOLzn9Ja7rFOmFBA1uZCNE1VVNGVwLEOUIRCsJMrAbCYRxMnFBdZC20NMf8izpPlc0yUm0gR61LH7NHFrZA3TgI7pqmoiJA5TlJ8HZCvs034ohVDIUq4IQZDZD");
             case 2:
-                this.twitterConsumerKey = "otHm6UTgJ88keqeS95sTqiCqE";
-                this.twitterConsumerSecret = "7vM6EDM5VqNYvs0pFhym09KxqdtqZ0nvl3WkWuOQ18MHvmrR9T";
-                this.twitterAccessToken = "234690092-9BwU6ZeDcMzN4UGV9BC9WoOy6uUOGexMiGWYV1eE";
-                this.twitterAccessTokenSecret = "s893vukc7vfDGcmNNkjPvmKOLTeXDZv5sjCzuqgxytqUy";
-                facebookAccessToken = "CAAM7hapoD4gBAJnvO13rSOxGABWHDZCIo90ajzvKGBSovy1v1g2eqbbXNKKG3A4wr8xvFefSSD7OAMSZBXWscRQSZCW6o1P5EAIbe7ep4TwAJZBIZBJcZA8CPke3n2uZB79GKXiZAKWu7tsrr1E0fyAZCirZBl7aPT1kPOLZC3TzkZADdR80acd6m7n6cfSGaC61DYl1rWniKl1O0geBKZBIZByviBAGdzHpZA6ZApIZD";
+//                Martin
+
+//                this.setTwitterConsumerKey();
+//                this.setTwitterConsumerSecret();
+//                this.setTwitterAccessToken();
+//                this.setTwitterAccessTokenSecret();
+               this.setUserFacebookAccessToken("CAAM7hapoD4gBAKRZCm4bYxola2oKbM1gGvF9uLudZAr9sRiBs6ZAP33bMizk05iicry6UIrAZAUysgQWQ7PQdKg8zAMYH41ttj16ZCDg7mi9M81B835rczwbJslZCRSEIbwJ27HXC9AYcRWyYSFuNkrKGVzFxadZB94mPeavCNMXaZCPSOLGYvhZC7u8avZBs7Xp00UHsjj7VQTwZDZD");
         }
     }
 
@@ -46,6 +49,7 @@ public class ProfileInternal implements IProfileInternal {
      * Get hard coded Facebook access tokens for users
      * @return
      */
+    @Override
     public String getUserFacebookAccessToken(){
         return this.facebookAccessToken;
     }
@@ -55,18 +59,42 @@ public class ProfileInternal implements IProfileInternal {
         this.facebookAccessToken = token;
     }
 
+    @Override
+    public void setTwitterConsumerKey(String consumerKey) {
+        this.twitterConsumerKey = consumerKey;
+    }
+
+    @Override
+    public void setTwitterConsumerSecret(String consumerSecret) {
+        this.twitterConsumerSecret = consumerSecret;
+    }
+
+    @Override
+    public void setTwitterAccessToken(String accessToken) {
+        this.twitterAccessToken = accessToken;
+    }
+
+    @Override
+    public void setTwitterAccessTokenSecret(String accessTokenSecret) {
+        this.twitterAccessTokenSecret = accessTokenSecret;
+    }
+
+    @Override
     public String getTwitterConsumerKey() {
         return this.twitterConsumerKey;
     }
 
+    @Override
     public String getTwitterConsumerSecret() {
         return this.twitterConsumerSecret;
     }
 
+    @Override
     public String getTwitterAccessToken() {
         return this.twitterAccessToken;
     }
 
+    @Override
     public String getTwitterAccessTokenSecret() {
         return this.twitterAccessTokenSecret;
     }
