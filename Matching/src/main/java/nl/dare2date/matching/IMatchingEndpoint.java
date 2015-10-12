@@ -9,4 +9,5 @@ import org.springframework.ws.server.endpoint.annotation.RequestPayload;
  */
 public interface IMatchingEndpoint {
     MatchResponse match(@RequestPayload MatchRequest req);
+    String getMessage(int percentage);
 }
