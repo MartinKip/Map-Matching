@@ -38,7 +38,7 @@ public class MatchingEndpoint implements IMatchingEndpoint{
 
         // Get twitter data
         List<String> viewUserTwitterData = getTwitterData.getData(viewUser);
-        List<String> profileUserTwitterdata = getTwitterData.getData(profileUser);
+        List<String> profileUserTwitterData = getTwitterData.getData(profileUser);
 
         // Get facebook data
         List<String> viewUserLikes = this.getFacebookData.getData(viewUser);
@@ -47,11 +47,11 @@ public class MatchingEndpoint implements IMatchingEndpoint{
         List<List<String>> allLists = new ArrayList<>();
         allLists.add(viewUserTwitterData);
         allLists.add(viewUserLikes);
-        allLists.add(profileUserTwitterdata);
+        allLists.add(profileUserTwitterData);
         allLists.add(profileUserLikes);
 
         int totalResults = getTotalResults(allLists);
-        int matches = getMatches(viewUserTwitterData, profileUserTwitterdata, viewUserLikes, profileUserLikes);
+        int matches = getMatches(viewUserTwitterData, profileUserTwitterData, viewUserLikes, profileUserLikes);
 
         int percentage = (int) getPercentage(totalResults, matches);
         result.setValue(percentage);
@@ -62,7 +62,7 @@ public class MatchingEndpoint implements IMatchingEndpoint{
         return response;
     }
 
-    private String getMessage(int percentage) {
+    public String getMessage(int percentage) {
         String returnMessage = "";
         if(percentage < 33) {
             returnMessage  = "Hopeloos";
@@ -77,7 +77,14 @@ public class MatchingEndpoint implements IMatchingEndpoint{
     }
 
     private double getPercentage(double totalResults, double matches) {
-        return  (matches / totalResults) * 100;
+        double returnValue;
+        if(totalResults == 0) {
+            returnValue = 0;
+        }
+        else {
+            returnValue  = (matches / totalResults) * 100;
+        }
+        return  returnValue;
     }
 
     private int getMatches(List<String> viewUserTwitterData, List<String> profileUserTwitterdata, List<String> viewUserLikes, List<String> profileUserLikes) {
