@@ -28,7 +28,7 @@ public class MatchingEndpointTest {
     }
 
     @Test
-    public void SameListOfOneReturnsOne() throws Exception{
+    public void ReturnsFullMatch() throws Exception{
         // Temp stubs return same lists
 
         MatchInput input = new MatchInput();
@@ -37,7 +37,8 @@ public class MatchingEndpointTest {
         MatchRequest request = new MatchRequest();
         request.setInput(input);
         MatchResponse response = matchingEndpoint.match(request);
-        assertEquals(1, response.getResult().getValue());
+        assertEquals(100, response.getResult().getValue());
+        assertEquals("Perfect", response.getResult().getMessage());
     }
 
     @Test(expected = NullPointerException.class)
@@ -45,4 +46,20 @@ public class MatchingEndpointTest {
         MatchRequest request = new MatchRequest();
         matchingEndpoint.match(request);
     }
+
+    @Test
+    public void getMessageTest() {
+        final int hopeloosPercentage = 30;
+        final int middelmatigPercentage = 50;
+        final int perfectPercentage = 80;
+        final String hopeloosMessage = "Hopeloos";
+        final String middelmatigMessage = "Middelmatig";
+        final String perfectMessage = "Perfect";
+
+        assertEquals(hopeloosMessage, matchingEndpoint.getMessage(hopeloosPercentage));
+        assertEquals(middelmatigMessage, matchingEndpoint.getMessage(middelmatigPercentage));
+        assertEquals(perfectMessage, matchingEndpoint.getMessage(perfectPercentage));
+
+    }
+
 }
