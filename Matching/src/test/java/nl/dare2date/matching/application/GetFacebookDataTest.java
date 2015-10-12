@@ -32,8 +32,4 @@ public class GetFacebookDataTest {
         assertEquals(token, result.get(0));
     }
 
-    @Test
-    public void GetFacebookReturnsListOfString() throws Exception{
-
-    }
 }
