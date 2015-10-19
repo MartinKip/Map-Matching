@@ -1,0 +1,8 @@
+nl\han\dare2date\matchservice\model\MatchRequest.class
+nl\han\dare2date\matchservice\model\MatchResult.class
+nl\han\dare2date\matchservice\model\MatchResponse.class
+nl\han\dare2date\matchservice\model\package-info.class
+nl\han\dare2date\matchservice\model\User.class
+nl\han\dare2date\matchservice\SocialMediaMatchAggregrate.class
+nl\han\dare2date\matchservice\SocialMediaMatchRoute.class
+nl\han\dare2date\matchservice\model\ObjectFactory.class
