@@ -33,15 +33,14 @@ public class ProfileInternal implements IProfileInternal {
                 this.setTwitterConsumerSecret("7vM6EDM5VqNYvs0pFhym09KxqdtqZ0nvl3WkWuOQ18MHvmrR9T");
                 this.setTwitterAccessToken("234690092-9BwU6ZeDcMzN4UGV9BC9WoOy6uUOGexMiGWYV1eE");
                 this.setTwitterAccessTokenSecret("s893vukc7vfDGcmNNkjPvmKOLTeXDZv5sjCzuqgxytqUy");
-                this.setUserFacebookAccessToken("CAACEdEose0cBAOtgMEjrl8iyZAIRT9dfCC1kTtGNofN3ZCQauiZCLiVXb5HplZCkihWfvNDIkaJ9ek5ZA2alAAxZAj3ZB9pshx7vHssg9dlKkCiz4ZBZCfQCtxuxP5VetQOQRyX5CCw6JiSrgGlHyqjLW2fdxS1ZCu2eCXTwOpqXVYZCthZCVRZAO6GvaZCDkwiUiNf2F3ZAgbXbvMdWQZDZD");
+                this.setUserFacebookAccessToken("CAAM7hapoD4gBAMZCCyVANIcfG8DkM9SQJBhq7nhZASTcDxIDMwcoB9ZCq8g5O17cglh1kL4qMmPTCP5HlqFIKRhgZBIBK4G2qxcLEZCybgZAJksSYBIKsgAZBvSjXIsTd2cZB8DfkkA0FaIlvVqotSZBN0Rkt9aw5yPzuDmf8EpQI8lZCv7vZAqAh39lnS4qX3Fxu6YiaUo08HioAZDZD");
             case 2:
 //                Martin
-
 //                this.setTwitterConsumerKey();
 //                this.setTwitterConsumerSecret();
 //                this.setTwitterAccessToken();
 //                this.setTwitterAccessTokenSecret();
-               this.setUserFacebookAccessToken("CAAM7hapoD4gBAKRZCm4bYxola2oKbM1gGvF9uLudZAr9sRiBs6ZAP33bMizk05iicry6UIrAZAUysgQWQ7PQdKg8zAMYH41ttj16ZCDg7mi9M81B835rczwbJslZCRSEIbwJ27HXC9AYcRWyYSFuNkrKGVzFxadZB94mPeavCNMXaZCPSOLGYvhZC7u8avZBs7Xp00UHsjj7VQTwZDZD");
+               this.setUserFacebookAccessToken("CAAM7hapoD4gBAMZCCyVANIcfG8DkM9SQJBhq7nhZASTcDxIDMwcoB9ZCq8g5O17cglh1kL4qMmPTCP5HlqFIKRhgZBIBK4G2qxcLEZCybgZAJksSYBIKsgAZBvSjXIsTd2cZB8DfkkA0FaIlvVqotSZBN0Rkt9aw5yPzuDmf8EpQI8lZCv7vZAqAh39lnS4qX3Fxu6YiaUo08HioAZDZD");
         }
     }
 
