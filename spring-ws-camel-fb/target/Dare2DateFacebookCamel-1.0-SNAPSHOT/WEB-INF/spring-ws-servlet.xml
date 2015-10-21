@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:camel="http://camel.apache.org/schema/spring"
+       xmlns:camel="http://camel.apache.org/schema/spring" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
        xsi:schemaLocation="
          http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-	       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+	       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
+	       http://www.springframework.org/schema/jdbc
+	        http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd">
 
     <!-- === Route(s) ==== -->
     <camel:camelContext id="camelContext">
@@ -12,6 +14,19 @@
     </camel:camelContext>
 
     <bean id="matchRoute" class="nl.han.dare2date.matchservice.SocialMediaMatchRoute"/>
+
+    <jdbc:initialize-database data-source="dataSource"
+                              enabled="true">
+        <jdbc:script location="classpath:/webapp/schema.sql" />
+    </jdbc:initialize-database>
+
+    <bean id="dataSource"
+          class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://localhost/dare2date" />
+        <property name="username" value="root" />
+        <property name="password" value="Password" />
+    </bean>
 
     <!-- === Endpoint mapping(s) ==== -->
     <bean id="matchEndpointMapping" class="org.apache.camel.component.spring.ws.bean.CamelEndpointMapping">

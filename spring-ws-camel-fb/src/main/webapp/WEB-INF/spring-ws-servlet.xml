@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:camel="http://camel.apache.org/schema/spring"
+       xmlns:camel="http://camel.apache.org/schema/spring" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
        xsi:schemaLocation="
          http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-	       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+	       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
+	       http://www.springframework.org/schema/jdbc
+	        http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd">
 
     <!-- === Route(s) ==== -->
     <camel:camelContext id="camelContext">
@@ -12,6 +14,19 @@
     </camel:camelContext>
 
     <bean id="matchRoute" class="nl.han.dare2date.matchservice.SocialMediaMatchRoute"/>
+
+    <jdbc:initialize-database data-source="dataSource"
+                              enabled="true">
+        <jdbc:script location="classpath:schema.sql" />
+    </jdbc:initialize-database>
+
+    <bean id="dataSource"
+          class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://localhost/dare2date" />
+        <property name="username" value="root" />
+        <property name="password" value="Password" />
+    </bean>
 
     <!-- === Endpoint mapping(s) ==== -->
     <bean id="matchEndpointMapping" class="org.apache.camel.component.spring.ws.bean.CamelEndpointMapping">
@@ -44,7 +59,7 @@
         <property name="locationUri" value="http://localhost:8080/match"/>
     </bean>
     <bean class="org.apache.camel.component.facebook.config.FacebookConfiguration">
-        <property name="OAuthAccessToken" value="CAAM7hapoD4gBAID0tyVDClrQ7NzghPMqN7EpMhPGbw1CxK7MwZAguWakBeyNoHmlQsWP7mKz0g74cUeZAmDwLz71EuRVIdKKb3vsvu21F5PcAFa0eAscJVhb9uDBDssJTxXuHdCqJ5n6WZBLaW8DVbIgx4LaP9z95CYZBHUBVyErFYc0xZB7Mx0cWPXDHFZAiEqSZBAZCOkfdwZDZD"></property>
+        <property name="OAuthAccessToken" value="CAAM7hapoD4gBAAZBAfnLGaQq1jZC4luKbB2K33tN5tFWr6GXDboxuQNZAjZCiuokUSmVtzWZA3wynMgXPfhhIUVE1B4rHsZAswj94smaZCmmb6S4pvxfnsxDRbQiSYanqkZAnnGZAZBE1xHeZCsjZCqXISEAXGSXAmRn4vWBa9I15hQO8QIZAZBDkNZB43fIUT9Ti1CsCygx6DDe1VzKikkT6C5Nasql9HWk3R8jjcZD"></property>
         <property name="OAuthAppId" value="909870205767560"></property>
         <property name="OAuthAppSecret" value="88e8ee990ee1e5a85d4a0b0591a1a140"></property>
     </bean>
