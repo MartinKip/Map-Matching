@@ -25,7 +25,6 @@ public class SocialMediaMatchAggregrate implements AggregationStrategy {
         if (oldExchange == null) {
             return newExchange;
         }
-
         /**
          * Build a Response using the results of twitter & facebook. This is no useful
          * matchalgorithm but you can do better don't you?

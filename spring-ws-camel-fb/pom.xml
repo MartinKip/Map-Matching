@@ -55,11 +55,27 @@
 			<groupId>org.apache.camel</groupId>
 			<artifactId>camel-twitter</artifactId>
 			<version>${camel.version}</version>
+
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-csv</artifactId>
+			<version>${camel.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>wsdl4j</groupId>
 			<artifactId>wsdl4j</artifactId>
 			<version>1.6.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-stream</artifactId>
+			<version>${camel.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-leveldb</artifactId>
+			<version>${camel.version}</version>
 		</dependency>
 		<!--The Maven JAXB jaxb_commons plugin requires this dependency-->
 		<dependency>
