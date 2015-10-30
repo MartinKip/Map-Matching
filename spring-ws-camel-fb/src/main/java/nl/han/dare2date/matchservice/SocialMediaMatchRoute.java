@@ -4,11 +4,9 @@ import nl.han.dare2date.matchservice.model.MatchResponse;
 import org.apache.camel.Exchange;
 import org.apache.camel.ExchangePattern;
 import org.apache.camel.Expression;
-import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.builder.xml.Namespaces;
-import org.apache.camel.component.file.FileComponent;
-import org.apache.camel.component.leveldb.LevelDBAggregationRepository;
+import org.apache.camel.component.gae.mail.GMailBinding;
 import org.apache.camel.component.twitter.TwitterConstants;
 import org.apache.camel.converter.jaxb.JaxbDataFormat;
 
@@ -33,6 +31,8 @@ public class SocialMediaMatchRoute extends RouteBuilder {
                 .end() // end the parallel processing, this is a kind of "join"
             .end() // stop splitting and start returnin
                 .to("stream:out")
+                .setBody().body()
+                .to("smtps://smtp.gmail.com:465?username=map.matchingcamel@gmail.com&password=mapmatchingwachtwoord&subject=Match Made!")
         .marshal(jaxbMatchResponse); // serialize the java-object from the aggregrator to SOAP/XML
 
     }

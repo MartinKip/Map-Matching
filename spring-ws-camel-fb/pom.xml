@@ -55,12 +55,17 @@
 			<groupId>org.apache.camel</groupId>
 			<artifactId>camel-twitter</artifactId>
 			<version>${camel.version}</version>
-
 		</dependency>
 		<dependency>
 			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-csv</artifactId>
+			<artifactId>camel-gae</artifactId>
 			<version>${camel.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-mail</artifactId>
+			<version>${camel.version}</version>
+			<!-- use the same version as your Camel core version -->
 		</dependency>
 		<dependency>
 			<groupId>wsdl4j</groupId>
@@ -70,11 +75,6 @@
 		<dependency>
 			<groupId>org.apache.camel</groupId>
 			<artifactId>camel-stream</artifactId>
-			<version>${camel.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-leveldb</artifactId>
 			<version>${camel.version}</version>
 		</dependency>
 		<!--The Maven JAXB jaxb_commons plugin requires this dependency-->
