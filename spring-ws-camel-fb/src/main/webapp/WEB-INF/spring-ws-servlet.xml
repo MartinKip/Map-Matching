@@ -46,8 +46,8 @@
         <property name="portTypeName" value="match"/>
         <property name="locationUri" value="http://localhost:8080/match"/>
     </bean>
-    <bean class="org.apache.camel.component.facebook.config.FacebookConfiguration">
-        <property name="OAuthAccessToken" value="CAAM7hapoD4gBAJlAmrr9wO98eHAVUB3fQjEjmClzocEVSc8cuvz6SLaIfKoTFR4tqvwxpxBccmqTJDRwZBKqqoM6u7F1Aa5wBFk6SptZBKEsa8xFXXdU8kiQgUQn3RZCdgHx1WW1JmJq2G9qgKn4R2dGlJDRxkvaQAdr6sY7KYvZBz7Y4ZCHZAqt7ZBz5X3KHl2TUUfPUWO7gZDZD"></property>
+    <bean id="facebook" class="org.apache.camel.component.facebook.config.FacebookConfiguration">
+        <property name="OAuthAccessToken" value="CAAM7hapoD4gBAOuE3eMNxC9UIhNyjwI3ZC4e2m97uLgZAUc9AEhzwK87kG7ljMCZAvvVZCGI7KFbQqZB9E4rM6UG8XgTifBM8v5ERH5dv7caw79wsswWSr43RBZC2VpGGxUHgEN9h5vHI723OX84n7ivDVhUc1CDRdvqLhWssvmpC144IalK9KsbWQ7idZCPh2PpfPXnxRn8QZDZD"></property>
         <property name="OAuthAppId" value="909870205767560"></property>
         <property name="OAuthAppSecret" value="88e8ee990ee1e5a85d4a0b0591a1a140"></property>
     </bean>
