@@ -47,7 +47,7 @@
         <property name="locationUri" value="http://localhost:8080/match"/>
     </bean>
     <bean id="facebook" class="org.apache.camel.component.facebook.config.FacebookConfiguration">
-        <property name="OAuthAccessToken" value="CAAM7hapoD4gBAKZAxsyxSi3GyBIGl2uFcfDcfLacln3EKbRGlJzySE3yVp6NBOCJiRaBbTO5IFvCVMGG27wIuKP8uZA7Q0IlXAyCy23OD4T5remcPwxdDrf2n42HonXxYJ4Orxdco84dk4ZArtuxOM7HEMG2qeHvXs6uH9zabxcVqfraXgO1h10i8cb65vioKzMRIvjkwZDZD"></property>
+        <property name="OAuthAccessToken" value="CAAM7hapoD4gBAKEqoTuggzdyzvxWZCyytnRZATR5ymk9mehWZBxrZCKElKlMIjxAxbEAKDfAZBRnQiwVENxOzImG4N0VCdLeCLtgNDL7zZAzqtAZCnLEeKJeWbUh88PHIo4qxF4xzZCA42fxYXFxZAvadth8de9It9lvPuF6AUbF0hGgvvyVkUdnqQw8EIzPwuYeOHZAkj2P7hwgZDZD"></property>
         <property name="OAuthAppId" value="909870205767560"></property>
         <property name="OAuthAppSecret" value="88e8ee990ee1e5a85d4a0b0591a1a140"></property>
     </bean>

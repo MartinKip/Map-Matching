@@ -15,6 +15,8 @@ import java.util.ArrayList;
 public class SocialMediaMatchAggregrate implements AggregationStrategy {
     private int match = 0;
 
+    private MatchMaker matchMaker = new MatchMaker();
+
     /**
      * This method is called every time a to(...) returns a response. This response (whether it's from
      * twitter or facebook) is sent in the body of the newExchange.
@@ -27,6 +29,7 @@ public class SocialMediaMatchAggregrate implements AggregationStrategy {
         if (oldExchange == null) {
             return newExchange;
         }
+
         /**
          * Build a Response using the results of twitter & facebook. This is no useful
          * matchalgorithm but you can do better don't you?
@@ -34,29 +37,35 @@ public class SocialMediaMatchAggregrate implements AggregationStrategy {
         increateMatchValueForFacebookUser(oldExchange, newExchange);
         increaseMatchForTwitterStatus(oldExchange, newExchange);
 
+        this.match = this.matchMaker.calculateMatch();
+
+        MatchResult matchResult = new MatchResult();
+        matchResult.setNumber(BigInteger.valueOf(match));
+        MatchResponse matchResponse = new MatchResponse();
+        matchResponse.setMatchResult(matchResult);
+        oldExchange.getIn().setBody(matchResponse);
         return oldExchange;
     }
 
     private void increaseMatchForTwitterStatus(Exchange oldExchange, Exchange newExchange) {
         Message inputMessage = newExchange.getIn();
-//        System.out.println(oldExchange.getIn().getHeader("profileID"));
         ArrayList<Status> statuses = inputMessage.getBody(ArrayList.class);
+
         if (statuses != null) {
-            DTMNodeList oldHeader = (DTMNodeList) oldExchange.getIn().getHeader("profileID");
-            DTMNodeList newHeader = (DTMNodeList) oldExchange.getIn().getHeader("profileID");
+            Object profileID = oldExchange.getIn().getHeader("profileID");
+            ArrayList<String> profileWords = new ArrayList<>();
+            profileWords.add("Formule 1");
+            profileWords.add("Barcelona");
+            profileWords.add("OO");
+            profileWords.add("PHP");
+            profileWords.add("JavaScript");
 
-            System.out.println("oldHeader.getLength(): "+oldHeader.getLength());
-            System.out.println("newHeader.getLength(): "+newHeader.getLength());
-
+            this.matchMaker.addProfile(2);
             for (Status status : statuses) {
                 // A match is bigger when a user has a lots of tweets favoured
-                match += status.getFavoriteCount();
+                profileWords.add(status.getText());
             }
-            MatchResult matchResult = new MatchResult();
-            matchResult.setNumber(BigInteger.valueOf(match));
-            MatchResponse matchResponse = new MatchResponse();
-            matchResponse.setMatchResult(matchResult);
-            oldExchange.getIn().setBody(matchResponse);
+            this.matchMaker.addToProfile(Integer.parseInt(profileID.toString()), profileWords);
         }
     }
 
@@ -65,14 +74,20 @@ public class SocialMediaMatchAggregrate implements AggregationStrategy {
         User user = inputMessage.getBody(User.class);
 
         if (user != null) {
-//            System.out.println("fb, profileID: "+inputMessage.getHeader("profileID").toString());
-            match += user.getName().length();
-            MatchResult matchResult = new MatchResult();
-            // A match is bigger when a user has a long name
-            matchResult.setNumber(BigInteger.valueOf(match));
-            MatchResponse matchResponse = new MatchResponse();
-            matchResponse.setMatchResult(matchResult);
-            oldExchange.getIn().setBody(matchResponse);
+            Object profileID = oldExchange.getIn().getHeader("profileID");
+            ArrayList<String> profileWords = new ArrayList<String>();
+            profileWords.add("Voetbal");
+            profileWords.add("Ajax");
+            profileWords.add("HTML");
+            profileWords.add("PHP");
+            profileWords.add("Java");
+
+            for(String interest : user.getInterestedIn()) {
+                profileWords.add(interest);
+            }
+
+            this.matchMaker.addProfile(Integer.parseInt(profileID.toString()));
+            this.matchMaker.addToProfile(Integer.parseInt(profileID.toString()), profileWords);
         }
     }
 }

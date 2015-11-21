@@ -8,10 +8,15 @@ import org.apache.camel.component.twitter.TwitterConstants;
 import org.apache.camel.converter.jaxb.JaxbDataFormat;
 
 public class SocialMediaMatchRoute extends RouteBuilder {
+    private int profileID = 0;
+
+
     @Override
     public void configure() throws Exception {
         JaxbDataFormat jaxbMatchResponse = new JaxbDataFormat(MatchResponse.class.getPackage().getName());
         Namespaces ns = new Namespaces("mes", "http://www.han.nl/schemas/messages");
+
+        profileID = profileID + 1;
 
         from("spring-ws:rootqname:{http://www.han.nl/schemas/messages}MatchRequest?endpointMapping=#matchEndpointMapping")
             .setExchangePattern(ExchangePattern.InOut)
@@ -20,13 +25,13 @@ public class SocialMediaMatchRoute extends RouteBuilder {
                 .convertBodyTo(String.class) // we'll handle with the request as XML using XPath
                 .choice()
                     .when(body().contains("twitterName")) // send the twitterName to twitter and wait for the aggregrate to do something useful
+                    .setHeader("profileID", constant(profileID))
                     .setHeader(TwitterConstants.TWITTER_KEYWORDS, ns.xpath("/mes:twitterName/text()", String.class)) // fill the keyword parameter
-                    .setHeader("profileID", (ns.xpath("/mes:profileID/text()")))
                     .to("twitter://search")
                 .otherwise() // send the facebookid to FB and wait for the aggregrate to do something useful
                     .when(body().contains("facebookid"))
+                    .setHeader("profileID", constant(profileID))
                     .setHeader("CamelFacebook.userId", ns.xpath("/mes:facebookid/text()", String.class)) // fill the userid parameter
-                    .setHeader("profileID", (ns.xpath("/mes:profileID/text()")))
                     .to("facebook://user")
                 .end() // end the parallel processing, this is a kind of "join"
             .end() // stop splitting and start returnin
