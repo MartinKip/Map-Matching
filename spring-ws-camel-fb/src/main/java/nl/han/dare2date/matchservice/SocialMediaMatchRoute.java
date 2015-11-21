@@ -1,12 +1,9 @@
 package nl.han.dare2date.matchservice;
 
 import nl.han.dare2date.matchservice.model.MatchResponse;
-import org.apache.camel.Exchange;
 import org.apache.camel.ExchangePattern;
-import org.apache.camel.Expression;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.builder.xml.Namespaces;
-import org.apache.camel.component.gae.mail.GMailBinding;
 import org.apache.camel.component.twitter.TwitterConstants;
 import org.apache.camel.converter.jaxb.JaxbDataFormat;
 
@@ -24,9 +21,12 @@ public class SocialMediaMatchRoute extends RouteBuilder {
                 .choice()
                     .when(body().contains("twitterName")) // send the twitterName to twitter and wait for the aggregrate to do something useful
                     .setHeader(TwitterConstants.TWITTER_KEYWORDS, ns.xpath("/mes:twitterName/text()", String.class)) // fill the keyword parameter
+                    .setHeader("profileID", (ns.xpath("/mes:profileID/text()")))
                     .to("twitter://search")
                 .otherwise() // send the facebookid to FB and wait for the aggregrate to do something useful
+                    .when(body().contains("facebookid"))
                     .setHeader("CamelFacebook.userId", ns.xpath("/mes:facebookid/text()", String.class)) // fill the userid parameter
+                    .setHeader("profileID", (ns.xpath("/mes:profileID/text()")))
                     .to("facebook://user")
                 .end() // end the parallel processing, this is a kind of "join"
             .end() // stop splitting and start returnin
