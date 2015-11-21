@@ -1,9 +1,11 @@
 package nl.han.dare2date.matchservice;
 
+import com.sun.org.apache.xml.internal.dtm.ref.DTMNodeList;
 import facebook4j.User;
 import nl.han.dare2date.matchservice.model.MatchResponse;
 import nl.han.dare2date.matchservice.model.MatchResult;
 import org.apache.camel.Exchange;
+import org.apache.camel.Message;
 import org.apache.camel.processor.aggregate.AggregationStrategy;
 import twitter4j.Status;
 
@@ -36,8 +38,16 @@ public class SocialMediaMatchAggregrate implements AggregationStrategy {
     }
 
     private void increaseMatchForTwitterStatus(Exchange oldExchange, Exchange newExchange) {
-        ArrayList<Status> statuses = newExchange.getIn().getBody(ArrayList.class);
+        Message inputMessage = newExchange.getIn();
+//        System.out.println(oldExchange.getIn().getHeader("profileID"));
+        ArrayList<Status> statuses = inputMessage.getBody(ArrayList.class);
         if (statuses != null) {
+            DTMNodeList oldHeader = (DTMNodeList) oldExchange.getIn().getHeader("profileID");
+            DTMNodeList newHeader = (DTMNodeList) oldExchange.getIn().getHeader("profileID");
+
+            System.out.println("oldHeader.getLength(): "+oldHeader.getLength());
+            System.out.println("newHeader.getLength(): "+newHeader.getLength());
+
             for (Status status : statuses) {
                 // A match is bigger when a user has a lots of tweets favoured
                 match += status.getFavoriteCount();
@@ -51,8 +61,11 @@ public class SocialMediaMatchAggregrate implements AggregationStrategy {
     }
 
     private void increateMatchValueForFacebookUser(Exchange oldExchange, Exchange newExchange) {
-        User user = newExchange.getIn().getBody(User.class);
+        Message inputMessage = newExchange.getIn();
+        User user = inputMessage.getBody(User.class);
+
         if (user != null) {
+//            System.out.println("fb, profileID: "+inputMessage.getHeader("profileID").toString());
             match += user.getName().length();
             MatchResult matchResult = new MatchResult();
             // A match is bigger when a user has a long name
