@@ -53,7 +53,7 @@ public class SocialMediaMatchAggregrate implements AggregationStrategy {
 
         if (statuses != null) {
             Object profileID = oldExchange.getIn().getHeader("profileID");
-            ArrayList<String> profileWords = new ArrayList<>();
+            ArrayList<String> profileWords = new ArrayList<String>();
             profileWords.add("Formule 1");
             profileWords.add("Barcelona");
             profileWords.add("OO");
