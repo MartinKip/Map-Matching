@@ -68,6 +68,12 @@
 			<!-- use the same version as your Camel core version -->
 		</dependency>
 		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-sql</artifactId>
+			<version>${camel.version}</version>
+			<!-- use the same version as your Camel core version -->
+		</dependency>
+		<dependency>
 			<groupId>wsdl4j</groupId>
 			<artifactId>wsdl4j</artifactId>
 			<version>1.6.2</version>

@@ -21,7 +21,6 @@ public class MatchMaker {
         }
     }
 
-
     public void addProfile(int id) {
         for(Profile profile : profiles) {
             if(profile.getId() == id) {

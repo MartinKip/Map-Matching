@@ -47,6 +47,10 @@ public class SocialMediaMatchAggregrate implements AggregationStrategy {
         return oldExchange;
     }
 
+    public int getMatch(){
+        return this.match;
+    }
+
     private void increaseMatchForTwitterStatus(Exchange oldExchange, Exchange newExchange) {
         Message inputMessage = newExchange.getIn();
         ArrayList<Status> statuses = inputMessage.getBody(ArrayList.class);

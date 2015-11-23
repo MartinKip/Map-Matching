@@ -15,6 +15,17 @@
 
     <bean id="matchRoute" class="nl.han.dare2date.matchservice.SocialMediaMatchRoute"/>
 
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://localhost:3306/dare2date" />
+        <property name="username" value="root" />
+        <property name="password" value="Password" />
+    </bean>
+
+    <!-- SQL bean -->
+    <jdbc:initialize-database data-source="dataSource" enabled="true">
+        <jdbc:script location="classpath:schema.sql"/>
+    </jdbc:initialize-database>
 
     <!-- === Endpoint mapping(s) ==== -->
     <bean id="matchEndpointMapping" class="org.apache.camel.component.spring.ws.bean.CamelEndpointMapping">
@@ -47,7 +58,7 @@
         <property name="locationUri" value="http://localhost:8080/match"/>
     </bean>
     <bean id="facebook" class="org.apache.camel.component.facebook.config.FacebookConfiguration">
-        <property name="OAuthAccessToken" value="CAAM7hapoD4gBAKEqoTuggzdyzvxWZCyytnRZATR5ymk9mehWZBxrZCKElKlMIjxAxbEAKDfAZBRnQiwVENxOzImG4N0VCdLeCLtgNDL7zZAzqtAZCnLEeKJeWbUh88PHIo4qxF4xzZCA42fxYXFxZAvadth8de9It9lvPuF6AUbF0hGgvvyVkUdnqQw8EIzPwuYeOHZAkj2P7hwgZDZD"></property>
+        <property name="OAuthAccessToken" value="CAAM7hapoD4gBACfGa5dlKR9kJAZA9wQa8S0extsHHonIKqQNriNBeAGb5bbDGugKInMifZCZCZBdZA03l6NcJm22EMXikT7X8vdCI41n3sfZBPptixZCkWlV0ShAvJjiwUgBuvHkCr8eMSHPvibKkthKOBQurfuO7kRhHls5AZC0QPcf1ZBf0oBjw286Ak7CBkZC5XTi2ZC28KNRTL3GlMZBGwPpGBzel9wEhdsZD"></property>
         <property name="OAuthAppId" value="909870205767560"></property>
         <property name="OAuthAppSecret" value="88e8ee990ee1e5a85d4a0b0591a1a140"></property>
     </bean>
